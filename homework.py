@@ -103,8 +103,8 @@ class SportsWalking(Training):
         min_in_hour: int = 60
         spent_calories: float = (
             (coeff_calorie_1 * self.weight
-            + (self.get_mean_speed()**2 // self.height) * coeff_calorie_2
-            * self.weight) * self.duration * min_in_hour
+             + (self.get_mean_speed()**2 // self.height) * coeff_calorie_2
+             * self.weight) * self.duration * min_in_hour
         )
         return spent_calories
 
