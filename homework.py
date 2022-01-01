@@ -1,6 +1,7 @@
 from typing import Dict, Union
 from dataclasses import dataclass
 
+
 @dataclass
 class InfoMessage:
     """Информационное сообщение о тренировке."""
@@ -54,10 +55,10 @@ class Training:
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
         return InfoMessage(
-            type(self).__name__, 
-            self.duration, 
-            self.get_distance(), 
-            self.get_mean_speed(), 
+            type(self).__name__,
+            self.duration,
+            self.get_distance(),
+            self.get_mean_speed(),
             self.get_spent_calories()
         )
 
@@ -69,8 +70,9 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         return (
-            (self.COEFF_CALORIE_1 * self.get_mean_speed() - self.COEFF_CALORIE_2)
-            * self.weight / self.M_IN_KM * self.duration * self.M_IN_HOUR
+            (self.COEFF_CALORIE_1 * self.get_mean_speed()
+            - self.COEFF_CALORIE_2) * self.weight / self.M_IN_KM
+            * self.duration * self.M_IN_HOUR
         )
 
 
@@ -130,8 +132,8 @@ class Swimming(Training):
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
     workout_codes: Dict[str, Union[Running, SportsWalking, Swimming]] = {
-        'RUN': Running, 
-        'WLK': SportsWalking, 
+        'RUN': Running,
+        'WLK': SportsWalking,
         'SWM': Swimming,
     }
     if workout_type not in workout_codes.keys():
