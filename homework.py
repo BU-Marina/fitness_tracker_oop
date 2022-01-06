@@ -1,5 +1,5 @@
-from typing import Dict, Union
-from dataclasses import dataclass
+from typing import Dict, List, Type, Union
+from dataclasses import asdict, dataclass
 
 
 @dataclass
@@ -13,12 +13,12 @@ class InfoMessage:
 
     def get_message(self) -> str:
         return (
-            f'Тип тренировки: {self.training_type}; '
-            f'Длительность: {self.duration:.3f} ч.; '
-            f'Дистанция: {self.distance:.3f} км; '
-            f'Ср. скорость: {self.speed:.3f} км/ч; '
-            f'Потрачено ккал: {self.calories:.3f}.'
-        )
+            'Тип тренировки: {training_type}; '
+            'Длительность: {duration:.3f} ч.; '
+            'Дистанция: {distance:.3f} км; '
+            'Ср. скорость: {speed:.3f} км/ч; '
+            'Потрачено ккал: {calories:.3f}.'
+        ).format(**asdict(self))
 
 
 class Training:
@@ -47,10 +47,9 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        raise NotImplementedError((
+        raise NotImplementedError(
             'Method get_spent_calories is not implement for Training class. '
-            'Try Running, SportsWalking or Swimming subclassses'
-        ))
+        )
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -131,14 +130,14 @@ class Swimming(Training):
         )
 
 
-def read_package(workout_type: str, data: list) -> Training:
+def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    workout_codes: Dict[str, Union[Running, SportsWalking, Swimming]] = {
+    workout_codes: Dict[str, Type[Training]] = {
         'RUN': Running,
         'WLK': SportsWalking,
         'SWM': Swimming,
     }
-    if workout_type not in workout_codes.keys():
+    if workout_type not in workout_codes:
         raise ValueError('Был передан несуществующий вид тренировки.')
     return workout_codes[workout_type](*data)
 
