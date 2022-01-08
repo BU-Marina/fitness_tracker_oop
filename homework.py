@@ -12,13 +12,14 @@ class InfoMessage:
     calories: float
 
     def get_message(self) -> str:
-        return (
+        message = (
             'Тип тренировки: {training_type}; '
             'Длительность: {duration:.3f} ч.; '
             'Дистанция: {distance:.3f} км; '
             'Ср. скорость: {speed:.3f} км/ч; '
             'Потрачено ккал: {calories:.3f}.'
-        ).format(**asdict(self))
+        )
+        return message.format(**asdict(self))
 
 
 class Training:
@@ -48,7 +49,7 @@ class Training:
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
         raise NotImplementedError(
-            'Method get_spent_calories is not implement for Training class. '
+            'Метод get_spent_calories не определлён для класса Training.'
         )
 
     def show_training_info(self) -> InfoMessage:
@@ -138,7 +139,11 @@ def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
         'SWM': Swimming,
     }
     if workout_type not in workout_codes:
-        raise ValueError('Был передан несуществующий вид тренировки.')
+        trainings = ', '.join(workout_codes.keys())
+        raise ValueError(
+            f'Был передан несуществующий вид тренировки. '
+            f'Возможные варианты: {trainings}.'
+            )
     return workout_codes[workout_type](*data)
 
 
