@@ -139,7 +139,7 @@ def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
         'SWM': Swimming,
     }
     if workout_type not in workout_codes:
-        trainings = ', '.join(workout_codes.keys())
+        trainings = ', '.join(workout_codes)
         raise ValueError(
             f'Был передан несуществующий вид тренировки. '
             f'Возможные варианты: {trainings}.'
