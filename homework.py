@@ -10,16 +10,16 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
-
-    def get_message(self) -> str:
-        message = (
+    message: str = (
             'Тип тренировки: {training_type}; '
             'Длительность: {duration:.3f} ч.; '
             'Дистанция: {distance:.3f} км; '
             'Ср. скорость: {speed:.3f} км/ч; '
             'Потрачено ккал: {calories:.3f}.'
         )
-        return message.format(**asdict(self))
+
+    def get_message(self) -> str:
+        return self.message.format(**asdict(self))
 
 
 class Training:
@@ -139,7 +139,7 @@ def read_package(workout_type: str, data: List[Union[int, float]]) -> Training:
         'SWM': Swimming,
     }
     if workout_type not in workout_codes:
-        trainings = ', '.join(workout_codes)
+        trainings: str = ', '.join(workout_codes)
         raise ValueError(
             f'Был передан несуществующий вид тренировки. '
             f'Возможные варианты: {trainings}.'
