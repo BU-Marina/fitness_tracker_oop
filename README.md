@@ -127,3 +127,45 @@ def main(training)
 результатом выполнения метода является объект класса `InfoMessage`, он сохраняется в переменную `info`.
 – Для объекта `InfoMessage`, сохранённого в переменной `info`, вызывается метод,
 который возвращает строку сообщения с данными о тренировке.
+
+
+## Как запустить проект
+```
+git clone https://github.com/BU-Marina/fitness_tracker_oop
+```
+
+```
+cd fitness_tracker_oop
+```
+
+Cоздать и активировать виртуальное окружение:
+
+```
+python3 -m venv env
+```
+
+```
+source env/bin/activate
+```
+
+Установить зависимости из файла requirements.txt:
+
+```
+python3 -m pip install --upgrade pip
+```
+
+```
+pip install -r requirements.txt
+```
+
+Запустить проект:
+
+```
+python3 fitness_tracker.py
+```
+
+Запустить тесты:
+
+```
+pytest
+```
