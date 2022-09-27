@@ -160,7 +160,7 @@ pip install -r requirements.txt
 Запустить проект:
 
 ```
-python fitness_tracker.py
+python3 fitness_tracker.py
 ```
 
 Запустить тесты:
